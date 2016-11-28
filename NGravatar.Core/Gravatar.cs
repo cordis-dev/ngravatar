@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Web;
-using System.Linq;
-using System.Text;
-using System.Security.Cryptography;
 using System.Collections.Generic;
 
 using NGravatar.Utils;
@@ -13,18 +10,6 @@ namespace NGravatar {
     /// Class whose instances can retrieve Gravatar avatar images.
     /// </summary>
     public class Gravatar {
-
-        internal GravatarHasher Hasher {
-            get {
-                if (null == _Hasher) _Hasher = GravatarHasher.DefaultInstance;
-                return _Hasher;
-            }
-            set {
-                if (null == value) throw new ArgumentNullException("Hasher");
-                _Hasher = value;
-            }
-        }
-        private GravatarHasher _Hasher;
 
         internal HtmlBuilder HtmlBuilder {
             get {
@@ -118,7 +103,7 @@ namespace NGravatar {
         /// <param name="emailAddress">The email address for which the hash should be computed.</param>
         /// <returns>The hash of the <paramref name="emailAddress"/>.</returns>
         public string GetHash(string emailAddress) {
-            return Hasher.Hash(emailAddress);
+            return GravatarHasher.Hash(emailAddress);
         }
 
         /// <summary>
